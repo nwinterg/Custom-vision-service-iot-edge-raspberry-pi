@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3-debian-python:3.7
+FROM balenalib/raspberrypi3-debian-python:3.7-buster
 # The balena base image for building apps on Raspberry Pi 3. 
 # Raspbian Stretch required for piwheels support. https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/
 
@@ -35,7 +35,8 @@ RUN install_packages \
     # for video files
     libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
     # for gui
-    libqt4-test libqtgui4 libqtwebkit4 libgtk2.0-dev \
+    # libqt5-test libqtgui5 libqtwebkit5 libgtk2.0-dev \
+    libqt5gui5 libgtk2.0-dev \
     # high def image processing
     libilmbase-dev libopenexr-dev
 

@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3:stretch
+FROM balenalib/raspberrypi3-debian-python:3.7
 # The balena base image for building apps on Raspberry Pi 3. 
 # Raspbian Stretch required for piwheels support. https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/
 
@@ -12,15 +12,17 @@ RUN install_packages \
     python3-pip \
     python3-dev
 
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3    
+
 # Install Python packages
 COPY /build/arm32v7-requirements.txt ./
-RUN pip3 install --upgrade pip 
-RUN pip3 install --upgrade setuptools
-RUN pip3 install --index-url=https://www.piwheels.org/simple -r arm32v7-requirements.txt
+RUN python3 -m pip install --upgrade pip 
+RUN python3 -m pip install --upgrade setuptools
+RUN python3 -m pip install --index-url=https://www.piwheels.org/simple -r arm32v7-requirements.txt
 
 # Needed by iothub_client
 RUN install_packages \
-    libboost-python1.62.0 \
+    libboost-python1.74.0 \
     curl \
     libcurl4-openssl-dev
 
